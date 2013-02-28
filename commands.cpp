@@ -12,7 +12,6 @@ list<myString> split(string input)
         found = input.find(" ");
     }
 
-
     outputList.push_back(myString(input));
 
     return outputList;
@@ -22,11 +21,12 @@ list<myString> split(string input)
 void eval(list<myString> input)
 {
     myString current;
-    list<comp> stack;
+    list<matrix> stack;
+    // int i = 0;
     while(!input.empty())
     {
         current = input.front();
-        cout << current.str<<endl;
+        //cout << current.str<<endl;
         input.pop_front();
 
         if(current.isOp())
@@ -35,7 +35,9 @@ void eval(list<myString> input)
             {
                 if(current.str == (*it).opCode)
                 {
+
                     (*it).execute(stack);
+                    //   cout << "x" << endl;
                 }
             }
         }
@@ -45,7 +47,7 @@ void eval(list<myString> input)
         }
     }
 
-    cout << stack.front().toString();
+    cout << "\n"<< stack.front().toString();
 
     return;
 }

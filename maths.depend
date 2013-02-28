@@ -40,3 +40,35 @@
 1361991191 source:/home/oliver/Desktop/programming stuff/C++/maths/op.cpp
 	"main.h"
 
+1362094930 source:/home/oliver/Desktop/programming stuff/github/maths/commands.cpp
+	"main.h"
+
+1362094930 /home/oliver/Desktop/programming stuff/github/maths/main.h
+	<iostream>
+	<string>
+	<list>
+	<locale>
+	<sstream>
+	<cstring>
+	<cstdlib>
+
+1362081936 source:/home/oliver/Desktop/programming stuff/github/maths/comp.cpp
+	"main.h"
+
+1362094930 source:/home/oliver/Desktop/programming stuff/github/maths/main.cpp
+	"main.h"
+
+1362090288 source:/home/oliver/Desktop/programming stuff/github/maths/mystring.cpp
+	"main.h"
+
+1361997343 source:/home/oliver/Desktop/programming stuff/github/maths/number.cpp
+
+1362095396 source:/home/oliver/Desktop/programming stuff/github/maths/op.cpp
+	"main.h"
+
+1362095384 source:/home/oliver/Desktop/programming stuff/github/maths/matrix.cpp
+	"main.h"
+
+1362093239 source:/home/oliver/Desktop/programming stuff/github/maths/vect.cpp
+	"main.h"
+
