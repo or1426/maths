@@ -47,7 +47,7 @@ bool myString::isImag()
 }
 
 
-comp myString::value()
+matrix myString::value()
 {
     stringstream ss (stringstream::in | stringstream::out);
     comp temp;
@@ -64,7 +64,10 @@ comp myString::value()
         }
     }
 
-    return temp;
+    matrix tempM(temp);
+
+    //cout << tempM.toString()<<endl;
+    return tempM;
 }
 
 

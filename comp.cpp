@@ -52,7 +52,6 @@ comp comp::operator / (comp param){
 }
 string comp::toString(){
     stringstream temp;
-
-    temp << re << " + " << im << "i\n";
+    temp << re << " + " << im << "i";
     return temp.str();
 }
