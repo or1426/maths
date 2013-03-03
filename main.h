@@ -48,8 +48,9 @@ class vect{
         //Operators
         vect operator + (vect);
         vect operator - (vect);
-        vect operator * (vect);
+        comp operator * (vect);
         vect operator / (vect);
+        vect operator * (comp);
         bool operator = (vect);
 
         //functions

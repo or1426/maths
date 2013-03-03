@@ -36,7 +36,7 @@ comp comp::operator - (comp param){
 
 comp comp::operator * (comp param){
     comp temp;
-    cout << re << " " << im << "i " << param.re << " " << param.im << "i" <<endl;
+   // cout << re << " " << im << "i " << param.re << " " << param.im << "i" <<endl;
     temp.re = re*param.re - im*param.im;
     temp.im = re*param.im + im*param.re;
     return temp;
