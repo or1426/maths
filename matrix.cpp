@@ -41,8 +41,8 @@ matrix matrix::operator + (matrix param)
     matrix temp1 = *this,temp2 = param,temp3;
     vect v1,v2;
 
-    //  if(param.vList.size() == vList.size() && param.vList.front().elList.size() == vList.front().elList.size())
-    //  {
+    if(param.vList.size() == vList.size() && param.vList.front().elList.size() == vList.front().elList.size())
+    {
     while(!temp1.vList.empty())
     {
         v1 = temp1.vList.front();
@@ -51,7 +51,7 @@ matrix matrix::operator + (matrix param)
         temp2.vList.pop_front();
         temp3.vList.push_back(v1 + v2);
     }
-    //  }
+    }
 
     // cout << isVector << param.isVector <<temp3.isVector;
     if(isVector == true || param.isVector == true )
@@ -89,16 +89,18 @@ matrix matrix::operator * (matrix param)
 {
     matrix temp1 = *this,temp2 = param,temp3;
     vect v1,v2;
+    temp2 = ++temp2;
 
-    if(param.vList.size() == vList.size() && param.vList.front().elList.size() == vList.front().elList.size())
+    if(temp2.vList.size() == temp1.vList.size() && temp2.vList.front().elList.size() == temp1.vList.front().elList.size())
     {
-        while(!temp1.vList.empty())
-        {
-            v1 = temp1.vList.front();
-            temp1.vList.pop_front();
-            v2 = temp2.vList.front();
-            temp2.vList.pop_front();
-            temp3.vList.push_back(v1 * v2);
+        for(std::list<vect>::iterator m1it=temp1.vList.begin(); m1it != temp1.vList.end(); ++m1it){
+            vect v3;
+            for(std::list<vect>::iterator m2it=temp2.vList.begin(); m2it != temp2.vList.end(); ++m2it){
+                v1 = *m1it;
+                v2 = *m2it;
+                v3.elList.push_back(v1*v2);
+            }
+            temp3.vList.push_back(v3);
         }
     }
     return temp3;

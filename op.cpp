@@ -41,16 +41,40 @@ void sub(list<matrix> &stack)
 
 void mul(list<matrix> &stack)
 {
-    matrix temp1,temp2,temp3;
-    temp1 = *stack.begin();
+    matrix temp_m1,temp_m2,temp_m3;
+    comp temp_c1,temp_c2,temp_c3;
+    vect temp_v1,temp_v2,temp_v3;
 
+    temp_m1 = stack.front();
     stack.pop_front();
-    temp2 = *stack.begin();
 
+    temp_m2 = stack.front();
     stack.pop_front();
-    temp3 =  temp2 * temp1;
 
-    stack.push_front(temp3);
+    if(temp_m1.isComplex && temp_m2.isComplex){
+        temp_c1 = temp_m1.vList.front().elList.front();
+        temp_c2 = temp_m2.vList.front().elList.front();
+        temp_c3 =  temp_c2 * temp_c1;
+        //cout <<"c" <<endl;
+        temp_m3 = matrix(temp_c3);
+    }else if(temp_m1.isVector && temp_m2.isVector){
+        temp_v1 = temp_m1.vList.front();
+        temp_v2 = temp_m2.vList.front();
+        temp_v3 =  temp_v2 * temp_v1;
+        //cout <<"v" <<endl;
+        temp_m3 = matrix(temp_v3);
+    }else if(temp_m1.isComplex && temp_m2.isVector){
+        temp_c1 = temp_m1.vList.front().elList.front();
+        temp_v1 = temp_m2.vList.front();
+        temp_v3 =  temp_v1 * temp_c1;
+        //cout <<"v" <<endl;
+        temp_m3 = matrix(temp_v3);
+    }else{
+        temp_m3 =  temp_m2 * temp_m1;
+        //cout <<"m" <<endl;
+    }
+
+    stack.push_front(temp_m3);
 
 }
 
