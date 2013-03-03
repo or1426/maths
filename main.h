@@ -60,8 +60,7 @@ class vect{
 class matrix{
     public:
         list<vect> vList;
-        bool isVector;
-        bool isComplex;
+
         //Constructors
         matrix();
         matrix(const matrix &param);
@@ -75,6 +74,8 @@ class matrix{
         matrix operator - (matrix);
         matrix operator * (matrix);
         matrix operator / (matrix);
+        matrix operator * (comp);
+        vect operator * (vect);
         matrix operator ++(); //transpose
         bool operator = (matrix);
 
@@ -82,13 +83,41 @@ class matrix{
         string toString();
 };
 
+class object{
+    public:
+        string name;
+        matrix matrix_data;
+        vect vect_data;
+        comp comp_data;
+        bool isMatrix;
+        bool isVect;
+        bool isComp;
+        bool isVar;
+
+        object(){};
+        object(string str);
+        object(string str,const object &obj);
+        object(comp com);
+        object(vect vec);
+        object(matrix mat);
+        object(const object &obj);
+        ~object(){};
+
+        bool operator = (object param);
+
+        void value(matrix &m);
+        void value(vect &v);
+        void value(comp &c);
+        string toString();
+};
+
 class op{
     public:
         op(){};
-        op(string opS,void (*exe)(list<matrix> &stack));
+        op(string opS,void (*exe)(list<object> &stack));
         string opCode;
         string toString(){return opCode;};
-        void (*execute)(list<matrix> &stack);
+        void (*execute)(list<object> &stack);
 };
 
 class myString{
@@ -108,9 +137,11 @@ class myString{
         bool isReal();
         bool isImag();
         bool isOp();
+        bool isValid();
+        bool isDefined();
 
         //return what the string contains
-        matrix value();
+        object value();
         op toOp();
 };
 
@@ -118,12 +149,15 @@ list<myString> split(string input);
 
 void eval(list<myString> input);
 
-void add(list<matrix> &stack);
-void sub(list<matrix> &stack);
-void mul(list<matrix> &stack);
-void div(list<matrix> &stack);
-void makeVect(list<matrix> &stack);
-void trans(list<matrix> &stack);
-void makeMatrix(list<matrix> &stack);
-void help(list<matrix> &stack);
+void add(list<object> &stack);
+void sub(list<object> &stack);
+void mul(list<object> &stack);
+void div(list<object> &stack);
+void makeVect(list<object> &stack);
+void trans(list<object> &stack);
+void makeMatrix(list<object> &stack);
+void define(list<object> &stack);
+void help(list<object> &stack);
+
 extern list<op> opList;
+extern list<object> varList;

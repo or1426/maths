@@ -21,7 +21,7 @@ list<myString> split(string input)
 void eval(list<myString> input)
 {
     myString current;
-    list<matrix> stack;
+    list<object> stack;
     // int i = 0;
     while(!input.empty())
     {

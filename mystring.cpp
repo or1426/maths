@@ -37,8 +37,11 @@ bool myString::isImag()
         {
             ret = 0;
         }
-    }else{
-        if(*str.begin() != 'i'){
+    }
+    else
+    {
+        if(*str.begin() != 'i')
+        {
             ret = 0;
         }
     }
@@ -47,37 +50,110 @@ bool myString::isImag()
 }
 
 
-matrix myString::value()
+bool myString::isValid()
 {
-    stringstream ss (stringstream::in | stringstream::out);
-    comp temp;
-    ss << str << endl;
-    if(isReal()){
-        ss >> temp.re;
+    locale loc;
+    bool ret = 1;
 
-    }else if(isImag()){
-        if(str.size() ==1){
-            temp.im = 1;
-        }else{
-            ss >> temp.im;
+    if(str == string("i")){
+        return 0;
+    }
 
+    for(string::iterator it = str.begin(); it != str.end(); ++it)
+    {
+        if(!isalpha(*it,loc))
+        {
+            ret = 0;
+        }
+    }
+    return ret;
+}
+
+bool myString::isDefined()
+{
+
+    for(list<object>::iterator it = varList.begin(); it != varList.end(); ++it)
+    {
+        if((*it).name == str)
+        {
+            return 1;
         }
     }
 
-    matrix tempM(temp);
-
-    //cout << tempM.toString()<<endl;
-    return tempM;
+    return 0;
 }
 
 
-bool myString::isOp(){
+object myString::value()
+{
+    stringstream ss (stringstream::in | stringstream::out);
+    comp temp;
+    object tempO;
+    ss << str << endl;
 
-        for (std::list<op>::iterator it=opList.begin(); it != opList.end(); ++it){
-                if(str == (*it).opCode){
-                    return 1;
+    if(isValid())
+    {
+        if(isDefined())
+        {
+            for(list<object>::iterator it = varList.begin(); it != varList.end(); ++it)
+            {
+                if((*it).name == str)
+                {
+                    if((*it).isComp)
+                    {
+                        tempO = object((*it).comp_data);
+                    }
+                    else if((*it).isVect)
+                    {
+                        tempO = object((*it).vect_data);
+                    }
+                    else if((*it).isMatrix)
+                    {
+                        tempO = object((*it).matrix_data);
+                    }
                 }
             }
+        }else{
+            tempO = object(str);
+        }
+    }
+    else if(isReal())
+    {
+        ss >> temp.re;
+        tempO = object(temp);
+    }
+    else if(isImag())
+    {
+        if(str.size() ==1)
+        {
+            temp.im = 1;
+        }
+        else
+        {
+            ss >> temp.im;
+
+        }
+        tempO = object(temp);
+    }
+
+
+    //cout << tempM.toString()<<endl;
+    return tempO;
+}
+
+
+bool myString::isOp()
+{
+
+    for (std::list<op>::iterator it=opList.begin(); it != opList.end(); ++it)
+    {
+        if(str == (*it).opCode)
+        {
+            return 1;
+        }
+    }
 
     return 0;
 }
+
+

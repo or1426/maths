@@ -10,7 +10,8 @@ int main()
     op(string("/"),&div); //for vectors, matrices elementwise
     op(string(")"),&makeVect);
     op(string("}"),&makeMatrix);
-    op(string("t"),&trans); //matrix transpose and converts between row and column vectors
+    op(string("t"),&trans); //matrix transpose
+    op(string("def"),&define);
     op(string("-help"),&help);
 
     char inp[256];

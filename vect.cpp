@@ -13,14 +13,15 @@ vect::vect(const comp &param)
 
 vect::vect(const vect &param)
 {
-    list<comp> temp = param.elList;
-    comp c;
-    while(!temp.empty())
-    {
-        c = temp.front();
-        temp.pop_front();
-        elList.push_back(c);
-    }
+    /*comp c;
+    list<comp> clist = param.elList;
+    elList.clear();
+    while(!clist.empty()){
+        elList.push_front(clist.front());
+        clist.pop_front();
+    }*/
+
+    elList = param.elList;
 }
 
 vect::vect(list<comp> inList)

@@ -1,15 +1,15 @@
 #include "main.h"
 list<op> opList;
-op::op(string opS,void (*exe)(list<matrix> &stack))
+op::op(string opS,void (*exe)(list<object> &stack))
 {
     opCode = string(opS);
     execute = exe;
     (opList).push_front(*this);
 }
 
-void add(list<matrix> &stack)
+void add(list<object> &stack)
 {
-    matrix temp1,temp2,temp3;
+    object temp1,temp2,temp3;
 
     temp1 = stack.front();
     stack.pop_front();
@@ -17,133 +17,170 @@ void add(list<matrix> &stack)
     temp2 = stack.front();
     stack.pop_front();
 
-    temp3 =  temp2 + temp1;
+    temp3.comp_data =  temp2.comp_data + temp1.comp_data;
+    temp3.vect_data =  temp2.vect_data  + temp1.vect_data ;
+    temp3.matrix_data =  temp2.matrix_data + temp1.matrix_data;
 
+    temp3.isComp = temp1.isComp;
+    temp3.isVect = temp1.isVect;
+    temp3.isMatrix = temp1.isMatrix;
     stack.push_front(temp3);
 
 }
 
 
-void sub(list<matrix> &stack)
+void sub(list<object> &stack)
 {
-    matrix temp1,temp2,temp3;
-    temp1 = *stack.begin();
+    object temp1,temp2,temp3;
 
+    temp1 = stack.front();
     stack.pop_front();
-    temp2 = *stack.begin();
 
+    temp2 = stack.front();
     stack.pop_front();
-    temp3 =  temp2 - temp1;
 
+    temp3.comp_data =  temp2.comp_data - temp1.comp_data;
+    temp3.vect_data =  temp2.vect_data  - temp1.vect_data ;
+    temp3.matrix_data =  temp2.matrix_data - temp1.matrix_data;
+
+    temp3.isComp = temp1.isComp;
+    temp3.isVect = temp1.isVect;
+    temp3.isMatrix = temp1.isMatrix;
     stack.push_front(temp3);
-
 }
 
-void mul(list<matrix> &stack)
+void mul(list<object> &stack)
 {
-    matrix temp_m1,temp_m2,temp_m3;
-    comp temp_c1,temp_c2,temp_c3;
-    vect temp_v1,temp_v2,temp_v3;
+    object temp1,temp2,temp3;
 
-    temp_m1 = stack.front();
+    temp1 = stack.front();
     stack.pop_front();
 
-    temp_m2 = stack.front();
+    temp2 = stack.front();
     stack.pop_front();
 
-    if(temp_m1.isComplex && temp_m2.isComplex){
-        temp_c1 = temp_m1.vList.front().elList.front();
-        temp_c2 = temp_m2.vList.front().elList.front();
-        temp_c3 =  temp_c2 * temp_c1;
-        //cout <<"c" <<endl;
-        temp_m3 = matrix(temp_c3);
-    }else if(temp_m1.isVector && temp_m2.isVector){
-        temp_v1 = temp_m1.vList.front();
-        temp_v2 = temp_m2.vList.front();
-        temp_v3 =  temp_v2 * temp_v1;
-        //cout <<"v" <<endl;
-        temp_m3 = matrix(temp_v3);
-    }else if(temp_m1.isComplex && temp_m2.isVector){
-        temp_c1 = temp_m1.vList.front().elList.front();
-        temp_v1 = temp_m2.vList.front();
-        temp_v3 =  temp_v1 * temp_c1;
-        //cout <<"v" <<endl;
-        temp_m3 = matrix(temp_v3);
-    }else{
-        temp_m3 =  temp_m2 * temp_m1;
-        //cout <<"m" <<endl;
+  //  cout << temp1.toString() << endl;
+
+    if(temp2.isComp == temp1.isComp && temp2.isVect == temp1.isVect && temp2.isMatrix == temp1.isMatrix)
+    {
+        temp3.comp_data =  temp2.comp_data * temp1.comp_data;
+        temp3.vect_data =  temp2.vect_data  * temp1.vect_data ;
+        temp3.matrix_data =  temp2.matrix_data * temp1.matrix_data;
+
+        temp3.isComp = temp1.isComp;
+        temp3.isVect = temp1.isVect;
+        temp3.isMatrix = temp1.isMatrix;
+    }else if(temp1.isComp && temp2.isVect){
+        temp3.vect_data = temp2.vect_data * temp1.comp_data;
+        temp3.isComp = false;
+        temp3.isVect = true;
+        temp3.isMatrix = false;
+    }else if(temp1.isComp && temp2.isMatrix){
+        temp3.matrix_data = temp2.matrix_data * temp1.comp_data;
+        temp3.isComp = false;
+        temp3.isVect = false;
+        temp3.isMatrix = true;
+    }else if(temp1.isVect && temp2.isMatrix){
+        temp3.vect_data = temp2.matrix_data * temp1.vect_data;
+        temp3.isComp = false;
+        temp3.isVect = true;
+        temp3.isMatrix = false;
     }
-
-    stack.push_front(temp_m3);
-
-}
-
-void div(list<matrix> &stack)
-{
-    matrix temp1,temp2,temp3;
-
-    temp1 = *stack.begin();
-    stack.pop_front();
-
-    temp2 = *stack.begin();
-    stack.pop_front();
-
-    temp3 =  temp2 / temp1;
-
     stack.push_front(temp3);
 
 }
 
-void makeVect(list<matrix> &stack)
+void div(list<object> &stack)
 {
-    matrix current;
+    object temp1,temp2,temp3;
 
+    temp1 = stack.front();
+    stack.pop_front();
+
+    temp2 = stack.front();
+    stack.pop_front();
+
+    temp3.comp_data =  temp2.comp_data / temp1.comp_data;
+    temp3.vect_data =  temp2.vect_data  / temp1.vect_data ;
+    temp3.matrix_data =  temp2.matrix_data / temp1.matrix_data;
+
+    temp3.isComp = temp1.isComp;
+    temp3.isVect = temp1.isVect;
+    temp3.isMatrix = temp1.isMatrix;
+    stack.push_front(temp3);
+
+}
+
+void makeVect(list<object> &stack)
+{
+    object current;
     vect tempV;
-    while(!stack.empty() && stack.front().isComplex == true){
+    while(!stack.empty() && stack.front().isComp == true)
+    {
         current = stack.front();
         stack.pop_front();
-        tempV.elList.push_front(current.vList.front().elList.front());
+        tempV.elList.push_front(current.comp_data);
     }
 
-    matrix tempM(tempV);
-    tempM.isVector = true;
-    //cout << tempM.toString();
-    stack.push_front(tempM);
-  //  cout << "&&&&&&" << stack.front().isVector <<endl;
+    object tempO(tempV);
+
+    stack.push_front(tempO);
+
 
 }
 
-void trans(list<matrix> &stack)
+void trans(list<object> &stack)
 {
-    matrix current;
-    matrix temp;
+    object current;
+    object temp;
     current = stack.front();
     stack.pop_front();
-    temp = ++current;
+    temp.matrix_data = ++(current.matrix_data);
     stack.push_front(temp);
 }
 
-void makeMatrix(list<matrix> &stack)
+void makeMatrix(list<object> &stack)
 {
-    matrix current;
+    object current;
     matrix tempM;
 
-    while(!stack.empty() && stack.front().isVector == true){
+    while(!stack.empty() && stack.front().isVect == true)
+    {
         current = stack.front();
         stack.pop_front();
-        tempM.vList.push_front(current.vList.front());
+        tempM.vList.push_front(current.vect_data);
     }
 
-    tempM.isVector = false;
-    tempM.isComplex = false;
-    //cout << tempM.toString();
-    stack.push_front(tempM);
+    object tempO(tempM);
+    stack.push_front(tempO);
 }
 
-void help(list<matrix> &stack){
+void define(list<object> &stack)
+{
+    object temp1,temp2,temp3;
+
+    temp1 = stack.front();
+    stack.pop_front();
+
+    temp2 = stack.front();
+    stack.pop_front();
+  //  cout << "Hi" <<temp2.toString()  << endl;
+    if(temp1.isVar){
+        temp3 = object(temp1.name,temp2);
+        varList.push_back(temp3);
+    }
+
+    stack.push_front(temp3);
+
+    //cout << varList.back().name << "=" << varList.back().
+
+}
+
+void help(list<object> &stack)
+{
     cout << "********************************************************************************" <<endl;
     cout <<"Enter commands and arguments in form: arg1 arg2 .... argn command. For example:"<< endl << "4 10i + returns 4 + 10i" <<endl;
     cout <<"You can chain commands to evaluate more complicated expressions. For example:" << endl << "3 5 + 4 2 - / returns 4"<<endl;
     cout << "********************************************************************************" <<endl;
-    //stack.push_front(comp());
+    stack.push_front(object());
 }
