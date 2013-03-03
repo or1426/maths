@@ -55,9 +55,12 @@ bool myString::isValid()
     locale loc;
     bool ret = 1;
 
-    if(str == string("i")){
+    if(str == string("i"))
+    {
         return 0;
     }
+
+
 
     for(string::iterator it = str.begin(); it != str.end(); ++it)
     {
@@ -91,7 +94,7 @@ object myString::value()
     object tempO;
     ss << str << endl;
 
-    if(isValid())
+    if(isValid() && !isOp())
     {
         if(isDefined())
         {
@@ -99,21 +102,12 @@ object myString::value()
             {
                 if((*it).name == str)
                 {
-                    if((*it).isComp)
-                    {
-                        tempO = object((*it).comp_data);
-                    }
-                    else if((*it).isVect)
-                    {
-                        tempO = object((*it).vect_data);
-                    }
-                    else if((*it).isMatrix)
-                    {
-                        tempO = object((*it).matrix_data);
-                    }
+                    tempO = (*it);
                 }
             }
-        }else{
+        }
+        else
+        {
             tempO = object(str);
         }
     }

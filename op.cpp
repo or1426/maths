@@ -132,10 +132,11 @@ void makeVect(list<object> &stack)
 void trans(list<object> &stack)
 {
     object current;
-    object temp;
+    matrix tempM;
     current = stack.front();
     stack.pop_front();
-    temp.matrix_data = ++(current.matrix_data);
+    tempM = ++(current.matrix_data);
+    object temp(tempM);
     stack.push_front(temp);
 }
 
@@ -181,6 +182,13 @@ void help(list<object> &stack)
     cout << "********************************************************************************" <<endl;
     cout <<"Enter commands and arguments in form: arg1 arg2 .... argn command. For example:"<< endl << "4 10i + returns 4 + 10i" <<endl;
     cout <<"You can chain commands to evaluate more complicated expressions. For example:" << endl << "3 5 + 4 2 - / returns 4"<<endl;
+    cout << "Enter a vector using the operator ). For example: " <<endl;
+    cout <<"4 5 6i 2 ) returns a vector with those four elements" << endl;
+    cout << "Enter a matrix by applying the operator } vectors of the same length:" << endl;
+    cout << "2 3 i ) 3 5i 4 3i + ) } returns a matrix with elements 2,3,i in the first row and 3,5i,4+3i in the second" << endl;
+    cout <<"Use the def operator to define variables for example:"<<endl;
+    cout <<"2 x def means you can use the letter x anywhere later as a placeholder for the number 2" << endl;
+    cout << "This is more useful when entering long matrices and vectors which are a bit unwieldy" << endl;
     cout << "********************************************************************************" <<endl;
     stack.push_front(object());
 }

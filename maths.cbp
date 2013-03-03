@@ -41,8 +41,8 @@
 		<Unit filename="matrix.cpp" />
 		<Unit filename="mystring.cpp" />
 		<Unit filename="number.cpp" />
+		<Unit filename="object.cpp" />
 		<Unit filename="op.cpp" />
-		<Unit filename="op.h" />
 		<Unit filename="vect.cpp" />
 		<Extensions>
 			<code_completion />
