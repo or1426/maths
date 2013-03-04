@@ -12,13 +12,13 @@ Makes all the vectors before it into a matrix: eg 1 2 ) 3 i ) 8i 7) } returns
 a matrix with first row 1,2 second row 3,i and third row 8i,7
 
 #+
-add the two last things: eg 3 i + returns 3 + i and 3 i ) i 7 ) + returns a vector with elements 3+i,7+i
+Add the two last things: eg 3 i + returns 3 + i and 3 i ) i 7 ) + returns a vector with elements 3+i,7+i
 
 #-
-subtract the two last things: eg 5 2 - returns 3
+Subtract the two last things: eg 5 2 - returns 3
 
 #*
-does various things depending on arguements 
+Does various things depending on what you give it 
 eg:
 2 i * returns 2i
 
@@ -32,7 +32,7 @@ eg:
 1 2 ) 3 4 ) } 5 6 ) 7 8 ) } * returns  a matrix with first row  19,22 and second row 43,50 (standard matrix product)
 
 #/
-divides stuff. Works as you would expect for numbers. For vectors and matrices it works elementwise:
+Divides stuff. Works as you would expect for numbers. For vectors and matrices it works elementwise:
 6 2 / returns 3
 4 i / returns -4i
 12 20 ) 4 5 ) / returns a vector with elements 3,4
@@ -48,13 +48,13 @@ This allows you to define variables eg:
 
 returns 12+3i
 
-you can define vectors and matrices similarly:
+You can define vectors and matrices similarly:
 
 2 3 4 ) y def stores that vector in a variable y
 
 1 2 3 ) 4 5 6 ) } z def stores that matrix in a variable z
 
-if you def a variable more than once the new version overrides the old one:
+If you def a variable more than once the new version overrides the old one:
 
 3 x def
 87 4i ) x def
