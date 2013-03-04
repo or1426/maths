@@ -41,8 +41,11 @@ divides stuff. Works as you would expect for numbers. For vectors and matrices i
 #def
 This allows you to define variables eg:
 3 x def lets you use x in place of the number 3 so:
+
 3 x def
+
 4 i + x *
+
 returns 12+3i
 
 you can define vectors and matrices similarly:
@@ -57,7 +60,7 @@ if you def a variable more than once the new version overrides the old one:
 87 4i ) x def
 x 
 returns a vector with elements 87,4i
-
+N.B. the def operator returns the value that was defined so the first example above returns 3
 ##Note
 If you do anything not mentioned above then enjoy your free seg fault!
 
