@@ -17,7 +17,8 @@ add the two last things: eg 3 i + returns 3 + i and 3 i ) i 7 ) + returns a vect
 #-
 subtract the two last things: eg 5 2 - returns 3
 
-#* does various things depending on arguements 
+#*
+does various things depending on arguements 
 eg:
 2 i * returns 2i
 
@@ -29,6 +30,13 @@ eg:
 
 8 i ) 2 1 ) } 2 2 ) * returns a vector with elements 16+2i,4+2i (standard matrix, vector product)
 1 2 ) 3 4 ) } 5 6 ) 7 8 ) } * returns  a matrix with first row  19,22 and second row 43,50 (standard matrix product)
+
+#/
+divides stuff. Works as you would expect for numbers. For vectors and matrices it works elementwise:
+6 2 / returns 3
+4 i / returns -4i
+12 20 ) 4 5 ) / returns a vector with elements 3,4
+
 
 #def
 This allows you to define variables eg:
