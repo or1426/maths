@@ -58,3 +58,7 @@ if you def a variable more than once the new version overrides the old one:
 x 
 returns a vector with elements 87,4i
 
+##Note
+If you do anything not mentioned above then enjoy your free seg fault!
+
+
