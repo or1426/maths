@@ -57,10 +57,14 @@ You can define vectors and matrices similarly:
 If you def a variable more than once the new version overrides the old one:
 
 3 x def
+
 87 4i ) x def
+
 x 
 returns a vector with elements 87,4i
+
 N.B. the def operator returns the value that was defined so the first example above returns 3
+
 ##Note
 If you do anything not mentioned above then enjoy your free seg fault!
 
